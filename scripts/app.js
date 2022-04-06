@@ -13,14 +13,60 @@ function valuePusher() {
     }
 }
 
+function checkValue(tile) {
+        if (tile === 0) {
+            return true
+        } else {
+            return false
+        }
+}
+
+let newPopulation = 0
+
+function newNum() {
+    let randomIndex = Math.random()
+    console.log(randomIndex)
+    if (randomIndex < .8) {
+        newPopulation = 2
+    } else {
+        newPopulation = 4
+    }
+    console.log(newPopulation)
+}
+
+
+
+function populateRandom() {
+    let randomIndex = Math.floor(Math.random()*values.length)
+    let square = checkValue(values[randomIndex])
+    let wholeValue = values.every(element => {
+        element > 0
+    })
+    console.log(wholeValue)
+    newNum()
+    if (square === true && wholeValue === false) {
+        values[randomIndex] = newPopulation
+        valuePusher()
+    } else if (wholeValue === false) {
+        populateRandom()
+    } else if (wholeValue === true){
+        console.log('game over')
+    }
+}
+
 function moveRight(e) {
+    let sum = values[0] + values[1]
     if (e.keyCode === 39) {
         console.log('right')
+        values[3] = sum
+        values[0] = 0
+        values[1] = 0
+        valuePusher()
     }
 }
 function moveLeft(e) {
     if (e.keyCode === 37) {
-        console.log('left')
+        populateRandom()
     }
 }
 function moveUp(e) {
@@ -36,8 +82,7 @@ function moveDown(e) {
 
 
 valuePusher()
-console.log(boardArray)
-console.log(values)
+
 
 
 document.addEventListener('keydown', moveRight)
