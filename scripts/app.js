@@ -1,8 +1,8 @@
 const board = document.querySelector('.board-container')
 const boardArray = board.querySelectorAll('.tile')
 const values = [
-    0,0,4,0,
-    0,2,0,0,
+    0,0,0,0,
+    0,0,0,0,
     0,0,0,0,
     0,0,0,0
 ]
