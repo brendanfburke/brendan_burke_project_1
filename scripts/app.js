@@ -9,7 +9,12 @@ const values = [
 
 function valuePusher() {
     for (let i = 0; i<values.length; i++) {
-        boardArray[i].innerHTML=values[i].toString()
+        if (values[i] === 0) {
+            boardArray[i].innerHTML = ''
+        } else {
+
+            boardArray[i].innerHTML=values[i].toString()
+        }
     }
 }
 
@@ -39,17 +44,13 @@ function newNum() {
 function populateRandom() {
     let randomIndex = Math.floor(Math.random()*values.length)
     let square = checkValue(values[randomIndex])
-    let wholeValue = values.every(element => {
-        element > 0
-    })
-    console.log(wholeValue)
     newNum()
-    if (square === true && wholeValue === false) {
+    if (square === true) {
         values[randomIndex] = newPopulation
         valuePusher()
-    } else if (wholeValue === false) {
+    } else if (square === false) {
         populateRandom()
-    } else if (wholeValue === true){
+    } else {
         console.log('game over')
     }
 }
