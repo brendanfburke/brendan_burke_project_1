@@ -12,18 +12,21 @@ function valuePusher() {
         if (values[i] === 0) {
             boardArray[i].innerHTML = ''
         } else {
-
             boardArray[i].innerHTML=values[i].toString()
         }
     }
 }
 
+const zeroCheck = (element) => element === 0;
+
+// console.log(values.some(zeroCheck))
+
 function checkValue(tile) {
-        if (tile === 0) {
-            return true
-        } else {
-            return false
-        }
+    if (tile === 0) {
+        return true
+    } else {
+        return false
+    }
 }
 
 let newPopulation = 0
@@ -45,15 +48,27 @@ function populateRandom() {
     let randomIndex = Math.floor(Math.random()*values.length)
     let square = checkValue(values[randomIndex])
     newNum()
-    if (square === true) {
-        values[randomIndex] = newPopulation
-        valuePusher()
-    } else if (square === false) {
+        if (square === true) {
+            values[randomIndex] = newPopulation
+            valuePusher()
+        } else if (square === false) {
+            populateRandom()
+        } else {
+            console.log('game over')
+        }
+    console.log(values.some(zeroCheck))
+}
+
+function boardCheck() {
+    if (values.some(zeroCheck) === true) {
         populateRandom()
+    } else if (values.some(zeroCheck) === false) {
+        console.log('Game Over You Lose!!!')
     } else {
-        console.log('game over')
+        console.log('something is wrong')
     }
 }
+
 
 function moveRight(e) {
     let sum = values[0] + values[1]
@@ -67,7 +82,7 @@ function moveRight(e) {
 }
 function moveLeft(e) {
     if (e.keyCode === 37) {
-        populateRandom()
+        boardCheck()
     }
 }
 function moveUp(e) {
