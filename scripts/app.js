@@ -1,11 +1,13 @@
 const board = document.querySelector('.board-container')
 const boardArray = board.querySelectorAll('.tile')
 const values = [
-    0,0,0,0,
+    2,0,0,4,
     0,0,0,0,
     0,0,0,0,
     0,0,0,0
 ]
+
+
 
 function valuePusher() {
     for (let i = 0; i<values.length; i++) {
@@ -67,7 +69,40 @@ function lossCheck() {
 }
 
 
-function slide(arr) {
+lossCheck()
+lossCheck()
+
+function adderRight(arr, a, b, c, d) {
+    if (arr[d] === arr[c]) {
+        arr[d] *= 2
+        arr[c] = 0
+    } else if (arr[c] === 0 && arr[d] === arr[b]) {
+        arr[d] *=2
+        arr[c] = 0
+    } else if (arr[c] === 0 && arr[b] === 0 && arr[d] === arr[a]) {
+        arr[d] *=2
+        arr[a] = 0
+    }
+    if (arr[c] === arr[b]) {
+        arr[c] *= 2
+        arr[b] = 0
+    } else if (arr[b] === 0 && arr[c] === arr[a]) {
+        arr[c] *=2
+        arr[a] = 0
+    }
+    if (arr[b] === arr[a]) {
+        arr[b] *= 2
+        arr[a] = 0
+    } 
+
+}
+
+function slideRight(arr) {
+    adderRight(values, 0, 1, 2, 3)
+    adderRight(values, 4, 5, 6, 7)
+    adderRight(values, 8, 9, 10, 11)
+    adderRight(values, 12, 13, 14, 15)
+    
     for (let j = 0; j<3; j++){
         for (let i = 0; i<3; i++) {
             if (arr[i] > 0 && arr[i+1] === 0) {
@@ -94,20 +129,21 @@ function slide(arr) {
             }
         }
     }
+    lossCheck()
 }
+
 
 
 function moveRight(e) {
     if (e.keyCode === 39) {
         console.log('right')
-        slide(values)
+        slideRight(values)
         valuePusher()
     }
 }
 function moveLeft(e) {
     if (e.keyCode === 37) {
         console.log('left')
-        lossCheck()
     }
 }
 function moveUp(e) {
@@ -121,6 +157,13 @@ function moveDown(e) {
     }
 }
 
+function spaceAdd(e) {
+    if (e.keyCode === 32) {
+        console.log('space')
+        lossCheck()
+    }
+}
+
 
 valuePusher()
 
@@ -130,3 +173,4 @@ document.addEventListener('keydown', moveRight)
 document.addEventListener('keydown', moveLeft)
 document.addEventListener('keydown', moveUp)
 document.addEventListener('keydown', moveDown)
+document.addEventListener('keydown', spaceAdd)
