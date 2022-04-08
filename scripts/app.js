@@ -7,7 +7,7 @@ const values = [
     0,0,0,0
 ]
 
-
+let validMove = false
 
 function valuePusher() {
     for (let i = 0; i<values.length; i++) {
@@ -55,9 +55,9 @@ function populateRandom() {
 const zeroCheck = (element) => element === 0;
 
 function lossCheck() {
-    if (values.some(zeroCheck) === true) {
+    if (values.some(zeroCheck) === true && validMove===true) {
         populateRandom()
-    } else if (values.some(zeroCheck) === false) {
+    } else if (values.some(zeroCheck) === false || validMove===false) {
         console.log('Game Over You Lose!!!')
     } else {
         console.log('something is wrong')
@@ -72,23 +72,29 @@ function adder(arr, a, b, c, d) {
     if (arr[d] === arr[c]) {
         arr[d] *= 2
         arr[c] = 0
+        validMove = true
     } else if (arr[c] === 0 && arr[d] === arr[b]) {
         arr[d] *=2
         arr[b] = 0
+        validMove = true
     } else if (arr[c] === 0 && arr[b] === 0 && arr[d] === arr[a]) {
         arr[d] *=2
         arr[a] = 0
-    }
+        validMove = true
+    } 
     if (arr[c] === arr[b]) {
         arr[c] *= 2
         arr[b] = 0
+        validMove = true
     } else if (arr[b] === 0 && arr[c] === arr[a]) {
         arr[c] *=2
         arr[a] = 0
-    }
+        validMove = true
+    } 
     if (arr[b] === arr[a]) {
         arr[b] *= 2
         arr[a] = 0
+        validMove = true
     } 
 
 }
@@ -102,14 +108,17 @@ function slideRight(arr, a, b, c, d) {
      if (arr[a] > 0 && arr[b] === 0) {
          arr[b] = arr[a]
          arr[a] = 0
+         validMove = true
      } 
      if (arr[b] > 0 && arr[c] === 0) {
          arr[c] = arr[b]
          arr[b] = 0
+         validMove = true
      }
      if (arr[c] > 0 && arr[d] === 0) {
          arr[d] = arr[c]
          arr[c] = 0
+         validMove = true
      }
     }
     
@@ -129,11 +138,12 @@ function moveRight(e) {
         slideRight(values, 4, 5, 6, 7)
         slideRight(values, 8, 9, 10, 11)
         slideRight(values, 12, 13, 14, 15)
-        
         lossCheck()
         valuePusher()
+        console.log(validMove)
     }
 }
+
 function moveLeft(e) {
     if (e.keyCode === 37) {
         console.log('left')
@@ -190,7 +200,7 @@ function spaceAdd(e) {
 
 valuePusher()
 
-
+console.log(validMove)
 
 document.addEventListener('keydown', moveRight)
 document.addEventListener('keydown', moveLeft)
