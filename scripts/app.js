@@ -80,6 +80,13 @@ function lossCheck() {
 lossCheck()
 lossCheck()
 
+function checkWin() {
+    const win = (element) => element === 2048
+    if (values.some(win) === true) {
+        console.log('you win')
+    }
+}
+
 
 function adder(arr, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
     let validAddOne
@@ -342,6 +349,7 @@ function moveRight(e) {
             console.log('no moves')
         }
         valuePusher()
+        checkWin()
     }
 }
 
@@ -350,20 +358,14 @@ function moveLeft(e) {
         console.log('left')
         adder(values, 3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8, 15, 14, 13, 12)
         slideRight(values, 3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8, 15, 14, 13, 12)
-        // adder(values, 3, 2, 1, 0)
-        // adder(values, 7, 6, 5, 4)
-        // adder(values, 11, 10, 9, 8)
-        // adder(values, 15, 14, 13, 12)
-        // slideRight(values, 3, 2, 1, 0)
-        // slideRight(values, 7, 6, 5, 4)
-        // slideRight(values, 11, 10, 9, 8)
-        // slideRight(values, 15, 14, 13, 12)
+
         if (validAdd === true || validMove === true) {
             lossCheck()
         } else if(validAdd === false && validMove === false) {
             console.log('no moves')
         }
         valuePusher()
+        checkWin()
     }
 }
 function moveUp(e) {
@@ -371,20 +373,14 @@ function moveUp(e) {
         console.log('up')
         adder(values, 15, 11, 7, 3, 14, 10, 6, 2, 13, 9, 5, 1, 12, 8, 4, 0)
         slideRight(values, 15, 11, 7, 3, 14, 10, 6, 2, 13, 9, 5, 1, 12, 8, 4, 0)
-        // adder(values, 15, 11, 7, 3)
-        // adder(values, 14, 10, 6, 2)
-        // adder(values, 13, 9, 5, 1)
-        // adder(values, 12, 8, 4, 0)
-        // slideRight(values, 15, 11, 7, 3)
-        // slideRight(values, 14, 10, 6, 2)
-        // slideRight(values, 13, 9, 5, 1)
-        // slideRight(values, 12, 8, 4, 0)
+
         if (validAdd === true || validMove === true) {
             lossCheck()
         } else if(validAdd === false && validMove === false) {
             console.log('no moves')
         }
         valuePusher()
+        checkWin()
     }
 }
 function moveDown(e) {
@@ -392,20 +388,14 @@ function moveDown(e) {
         console.log('down')
         adder(values, 3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12)
         slideRight(values, 3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12)
-        // adder(values, 3, 7, 11, 15)
-        // adder(values, 2, 6, 10, 14)
-        // adder(values, 1, 5, 9, 13)
-        // adder(values, 0, 4, 8, 12)
-        // slideRight(values, 3, 7, 11, 15)
-        // slideRight(values, 2, 6, 10, 14)
-        // slideRight(values, 1, 5, 9, 13)
-        // slideRight(values, 0, 4, 8, 12)
+
         if (validAdd === true || validMove === true) {
             lossCheck()
         } else if(validAdd === false && validMove === false) {
             console.log('no moves')
         }
         valuePusher()
+        checkWin()
     }
 }
 
