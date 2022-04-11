@@ -5,8 +5,22 @@ const values = [
     0,0,0,0,
     0,0,0,0,
     0,0,0,0,
-    0,0,0,0
+    0,0,0,0 
+
+    //lose condition
+    // 0,0,0,0,
+    // 1,6,7,8,
+    // 9,1,3,2,
+    // 5,4,6,1 
+
+    // win condition
+    // 0,0,0,0,
+    // 0,0,0,0,
+    // 0,0,0,1024,
+    // 0,0,0,1024
 ]
+
+
 
 function valuePusher() {
     for (let i = 0; i<values.length; i++) {
@@ -70,7 +84,7 @@ function lossCheck() {
     if (values.some(zeroCheck) === true) {
         populateRandom()
     } else if (values.some(zeroCheck) === false) {
-        console.log('Game Over You Lose!!!')
+        alert('You Lose! Press Reset to Play Again')
     } else {
         console.log('something is wrong')
     }
@@ -82,7 +96,7 @@ lossCheck()
 function checkWin() {
     const win = (element) => element === 2048
     if (values.some(win) === true) {
-        console.log('you win')
+        alert('You Win!')
     }
 }
 
