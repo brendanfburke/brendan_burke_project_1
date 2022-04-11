@@ -238,25 +238,94 @@ function adder(arr, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
 
 
 
-function slideRight(arr, a, b, c, d) {
+function slideRight(arr, a, b, c, d, e, f, g, h, z, j, k, l, m, n, o, p) {
+    let validMoveOne = false
+    let validMoveTwo = false
+    let validMoveThree = false
+    let validMoveFour = false
 
+    if ((arr[a] > 0 && (arr[b] === 0 || arr[c] === 0 || arr[d] === 0)) || (arr[b] > 0 && (arr[c] === 0 || arr[d] === 0)) || (arr[c] > 0 && arr[d] === 0)) {
         for (let i = 0; i<8; i++) {
          if (arr[a] > 0 && arr[b] === 0) {
              arr[b] = arr[a]
              arr[a] = 0
-             validMove = true
          } 
          if (arr[b] > 0 && arr[c] === 0) {
              arr[c] = arr[b]
              arr[b] = 0
-             validMove = true
          }
          if (arr[c] > 0 && arr[d] === 0) {
              arr[d] = arr[c]
              arr[c] = 0
-             validMove = true
          }
         }
+        validMoveOne = true
+    } else {
+        validMoveOne = false
+    }
+    if ((arr[e] > 0 && (arr[f] === 0 || arr[g] === 0 || arr[h] === 0)) || (arr[f] > 0 && (arr[g] === 0 || arr[h] === 0)) || (arr[g] > 0 && arr[h] === 0)) {
+        for (let i = 0; i<8; i++) {
+         if (arr[e] > 0 && arr[f] === 0) {
+             arr[f] = arr[e]
+             arr[e] = 0
+         } 
+         if (arr[f] > 0 && arr[g] === 0) {
+             arr[g] = arr[f]
+             arr[f] = 0
+         }
+         if (arr[g] > 0 && arr[h] === 0) {
+             arr[h] = arr[g]
+             arr[g] = 0
+         }
+        }
+        validMoveTwo = true
+    } else {
+        validMoveTwo = false
+    }
+    if ((arr[z] > 0 && (arr[j] === 0 || arr[k] === 0 || arr[l] === 0)) || (arr[j] > 0 && (arr[k] === 0 || arr[l] === 0)) || (arr[k] > 0 && arr[l] === 0)) {
+        for (let i = 0; i<8; i++) {
+         if (arr[z] > 0 && arr[j] === 0) {
+             arr[j] = arr[z]
+             arr[z] = 0
+         } 
+         if (arr[j] > 0 && arr[k] === 0) {
+             arr[k] = arr[j]
+             arr[j] = 0
+         }
+         if (arr[k] > 0 && arr[l] === 0) {
+             arr[l] = arr[k]
+             arr[k] = 0
+         }
+        }
+        validMoveThree = true
+    } else {
+        validMoveThree = false
+    }
+    if ((arr[m] > 0 && (arr[n] === 0 || arr[o] === 0 || arr[p] === 0)) || (arr[n] > 0 && (arr[o] === 0 || arr[p] === 0)) || (arr[o] > 0 && arr[p] === 0)) {
+        for (let i = 0; i<8; i++) {
+         if (arr[m] > 0 && arr[n] === 0) {
+             arr[n] = arr[m]
+             arr[m] = 0
+         } 
+         if (arr[n] > 0 && arr[o] === 0) {
+             arr[o] = arr[n]
+             arr[n] = 0
+         }
+         if (arr[o] > 0 && arr[p] === 0) {
+             arr[p] = arr[o]
+             arr[o] = 0
+         }
+        }
+        validMoveFour = true
+    } else {
+        validMoveFour = false
+    }
+
+    if (validMoveOne === true || validMoveTwo === true || validMoveThree === true || validMoveFour === true) {
+        validMove = true
+    } else if (validMoveOne === false && validMoveTwo === false && validMoveThree === false && validMoveFour === false) {
+        validMove = false 
+    }
 }
 
 
@@ -265,16 +334,12 @@ function moveRight(e) {
     if (e.keyCode === 39) {
         console.log('right')
         adder(values, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
-        // adder(values, 0, 1, 2, 3)
-        // adder(values, 4, 5, 6, 7)
-        // adder(values, 8, 9, 10, 11)
-        // adder(values, 12, 13, 14, 15)
-        slideRight(values, 0, 1, 2, 3)
-        slideRight(values, 4, 5, 6, 7)
-        slideRight(values, 8, 9, 10, 11)
-        slideRight(values, 12, 13, 14, 15)
-        if (validAdd === true) {
+        slideRight(values, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+
+        if (validAdd === true || validMove === true) {
             lossCheck()
+        } else if(validAdd === false && validMove === false) {
+            console.log('no moves')
         }
         valuePusher()
     }
@@ -284,16 +349,19 @@ function moveLeft(e) {
     if (e.keyCode === 37) {
         console.log('left')
         adder(values, 3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8, 15, 14, 13, 12)
+        slideRight(values, 3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8, 15, 14, 13, 12)
         // adder(values, 3, 2, 1, 0)
         // adder(values, 7, 6, 5, 4)
         // adder(values, 11, 10, 9, 8)
         // adder(values, 15, 14, 13, 12)
-        slideRight(values, 3, 2, 1, 0)
-        slideRight(values, 7, 6, 5, 4)
-        slideRight(values, 11, 10, 9, 8)
-        slideRight(values, 15, 14, 13, 12)
-        if (validAdd === true) {
+        // slideRight(values, 3, 2, 1, 0)
+        // slideRight(values, 7, 6, 5, 4)
+        // slideRight(values, 11, 10, 9, 8)
+        // slideRight(values, 15, 14, 13, 12)
+        if (validAdd === true || validMove === true) {
             lossCheck()
+        } else if(validAdd === false && validMove === false) {
+            console.log('no moves')
         }
         valuePusher()
     }
@@ -302,16 +370,19 @@ function moveUp(e) {
     if (e.keyCode === 38) {
         console.log('up')
         adder(values, 15, 11, 7, 3, 14, 10, 6, 2, 13, 9, 5, 1, 12, 8, 4, 0)
+        slideRight(values, 15, 11, 7, 3, 14, 10, 6, 2, 13, 9, 5, 1, 12, 8, 4, 0)
         // adder(values, 15, 11, 7, 3)
         // adder(values, 14, 10, 6, 2)
         // adder(values, 13, 9, 5, 1)
         // adder(values, 12, 8, 4, 0)
-        slideRight(values, 15, 11, 7, 3)
-        slideRight(values, 14, 10, 6, 2)
-        slideRight(values, 13, 9, 5, 1)
-        slideRight(values, 12, 8, 4, 0)
-        if (validAdd === true) {
+        // slideRight(values, 15, 11, 7, 3)
+        // slideRight(values, 14, 10, 6, 2)
+        // slideRight(values, 13, 9, 5, 1)
+        // slideRight(values, 12, 8, 4, 0)
+        if (validAdd === true || validMove === true) {
             lossCheck()
+        } else if(validAdd === false && validMove === false) {
+            console.log('no moves')
         }
         valuePusher()
     }
@@ -320,16 +391,19 @@ function moveDown(e) {
     if (e.keyCode === 40) {
         console.log('down')
         adder(values, 3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12)
+        slideRight(values, 3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12)
         // adder(values, 3, 7, 11, 15)
         // adder(values, 2, 6, 10, 14)
         // adder(values, 1, 5, 9, 13)
         // adder(values, 0, 4, 8, 12)
-        slideRight(values, 3, 7, 11, 15)
-        slideRight(values, 2, 6, 10, 14)
-        slideRight(values, 1, 5, 9, 13)
-        slideRight(values, 0, 4, 8, 12)
-        if (validAdd === true) {
+        // slideRight(values, 3, 7, 11, 15)
+        // slideRight(values, 2, 6, 10, 14)
+        // slideRight(values, 1, 5, 9, 13)
+        // slideRight(values, 0, 4, 8, 12)
+        if (validAdd === true || validMove === true) {
             lossCheck()
+        } else if(validAdd === false && validMove === false) {
+            console.log('no moves')
         }
         valuePusher()
     }
@@ -338,6 +412,7 @@ function moveDown(e) {
 function spaceAdd(e) {
     if (e.keyCode === 32) {
         console.log('space')
+        lossCheck()
     }
 }
 
