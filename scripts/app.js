@@ -1,17 +1,18 @@
 const board = document.querySelector('.board-container')
 const boardArray = board.querySelectorAll('.tile')
 const resetButton = document.querySelector('.reset')
+const message = board.querySelector('.popup')
 const values = [
-    0,0,0,0,
-    0,0,0,0,
-    0,0,0,0,
-    0,0,0,0 
+    // 0,0,0,0,
+    // 0,0,0,0,
+    // 0,0,0,0,
+    // 0,0,0,0 
 
     //lose condition
-    // 0,0,0,0,
-    // 1,6,7,8,
-    // 9,1,3,2,
-    // 5,4,6,1 
+   0,0,0,5,
+    1,6,7,8,
+    9,1,3,2,
+    5,4,6,1 
 
     // win condition
     // 0,0,0,0,
@@ -84,7 +85,8 @@ function lossCheck() {
     if (values.some(zeroCheck) === true) {
         populateRandom()
     } else if (values.some(zeroCheck) === false) {
-        alert('You Lose! Press Reset to Play Again')
+        message.classList.add('show')
+        message.innerHTML= 'You Lose! Press reset to play again'
     } else {
         console.log('something is wrong')
     }
@@ -96,7 +98,8 @@ lossCheck()
 function checkWin() {
     const win = (element) => element === 2048
     if (values.some(win) === true) {
-        alert('You Win!')
+        message.classList.add('show')
+        message.innerHTML = 'Winner! Press reset to play again!'
     }
 }
 
@@ -225,36 +228,6 @@ function adder(arr, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
         validAdd = false
     }
 }
-// function adder(arr, a, b, c, d) {
-//     if ((arr[a] > 0 && arr[a] === arr[b]) || (arr[a] > 0 && arr[a] === arr[c]) || (arr[a] > 0 && arr[a] === arr[d]) || (arr[b] > 0 && arr[b] === arr[c]) || (arr[b] > 0 && arr[b] === arr[d]) || (arr[c] > 0 && arr[c] === arr[d])) {
-//         validAdd = true
-//         if (arr[d] === arr[c]) {
-//             arr[d] *= 2
-//             arr[c] = 0
-//         } else if (arr[c] === 0 && arr[d] === arr[b]) {
-//             arr[d] *=2
-//             arr[b] = 0
-//         } else if (arr[c] === 0 && arr[b] === 0 && arr[d] === arr[a]) {
-//             arr[d] *=2
-//             arr[a] = 0
-//         } 
-//         if (arr[c] === arr[b]) {
-//             arr[c] *= 2
-//             arr[b] = 0
-//         } else if (arr[b] === 0 && arr[c] === arr[a]) {
-//             arr[c] *=2
-//             arr[a] = 0
-//         } 
-//         if (arr[b] === arr[a]) {
-//             arr[b] *= 2
-//             arr[a] = 0
-//         } 
-//         console.log(validAdd)
-//     } else {
-//         console.log(validAdd)
-//     }
-
-// }
 
 
 
@@ -427,6 +400,7 @@ function resetBoard() {
     valuePusher()
     lossCheck()
     lossCheck()
+    message.classList.remove('show')
 }
 
 valuePusher()
