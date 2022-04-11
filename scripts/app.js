@@ -1,6 +1,6 @@
 const board = document.querySelector('.board-container')
 const boardArray = board.querySelectorAll('.tile')
-const htmlValues = []
+const resetButton = document.querySelector('.reset')
 const values = [
     0,0,0,0,
     0,0,0,0,
@@ -24,7 +24,6 @@ function valuePusher() {
 
 console.log(boardArray[2].innerHTML)
 
-console.log(htmlValues)
 
 console.log(boardArray)
 
@@ -407,9 +406,18 @@ function spaceAdd(e) {
 }
 
 
+function resetBoard() {
+    for (let i = 0; i< values.length; i++) {
+        values[i] = 0
+    }
+    valuePusher()
+    lossCheck()
+    lossCheck()
+}
+
 valuePusher()
 
-
+resetButton.addEventListener('click', resetBoard)
 document.addEventListener('keydown', moveRight)
 document.addEventListener('keydown', moveLeft)
 document.addEventListener('keydown', moveUp)
