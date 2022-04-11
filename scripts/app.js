@@ -1,13 +1,12 @@
 const board = document.querySelector('.board-container')
 const boardArray = board.querySelectorAll('.tile')
+const htmlValues = []
 const values = [
-    0,0,0,0,
+    2,0,2,0,
     0,0,0,0,
     0,0,0,0,
     0,0,0,0
 ]
-
-let validMove = false
 
 function valuePusher() {
     for (let i = 0; i<values.length; i++) {
@@ -18,6 +17,19 @@ function valuePusher() {
         }
     }
 }
+
+
+
+
+
+console.log(boardArray[2].innerHTML)
+
+console.log(htmlValues)
+
+console.log(boardArray)
+
+let validMove = false
+
 
 function checkValue(tile) {
     if (tile === 0) {
@@ -129,6 +141,7 @@ function slideRight(arr, a, b, c, d) {
 
 function moveRight(e) {
     if (e.keyCode === 39) {
+        htmlValues.push(values)
         console.log('right')
         adder(values, 0, 1, 2, 3)
         adder(values, 4, 5, 6, 7)
@@ -138,6 +151,9 @@ function moveRight(e) {
         slideRight(values, 4, 5, 6, 7)
         slideRight(values, 8, 9, 10, 11)
         slideRight(values, 12, 13, 14, 15)
+
+        htmlValues.push(values)
+        console.log(htmlValues)
         lossCheck()
         valuePusher()
         console.log(validMove)
@@ -146,6 +162,7 @@ function moveRight(e) {
 
 function moveLeft(e) {
     if (e.keyCode === 37) {
+        let oldVal = values
         console.log('left')
         adder(values, 3, 2, 1, 0)
         adder(values, 7, 6, 5, 4)
@@ -157,6 +174,8 @@ function moveLeft(e) {
         slideRight(values, 15, 14, 13, 12)
         lossCheck()
         valuePusher()
+        htmlValues.push(values)
+        console.log(htmlValues)
     }
 }
 function moveUp(e) {
@@ -172,6 +191,8 @@ function moveUp(e) {
         slideRight(values, 12, 8, 4, 0)
         lossCheck()
         valuePusher()
+        htmlValues.push(values)
+        console.log(htmlValues)
     }
 }
 function moveDown(e) {
@@ -187,6 +208,8 @@ function moveDown(e) {
         slideRight(values, 0, 4, 8, 12)
         lossCheck()
         valuePusher()
+        htmlValues.push(values)
+        console.log(htmlValues)
     }
 }
 
