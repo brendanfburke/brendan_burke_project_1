@@ -2,7 +2,7 @@ const board = document.querySelector('.board-container')
 const boardArray = board.querySelectorAll('.tile')
 const htmlValues = []
 const values = [
-    2,0,2,0,
+    0,0,0,0,
     0,0,0,0,
     0,0,0,0,
     0,0,0,0
@@ -28,7 +28,8 @@ console.log(htmlValues)
 
 console.log(boardArray)
 
-let validMove = false
+let validMove
+let validAdd
 
 
 function checkValue(tile) {
@@ -67,9 +68,9 @@ function populateRandom() {
 const zeroCheck = (element) => element === 0;
 
 function lossCheck() {
-    if (values.some(zeroCheck) === true && validMove===true) {
+    if (values.some(zeroCheck) === true) {
         populateRandom()
-    } else if (values.some(zeroCheck) === false || validMove===false) {
+    } else if (values.some(zeroCheck) === false) {
         console.log('Game Over You Lose!!!')
     } else {
         console.log('something is wrong')
@@ -81,67 +82,63 @@ lossCheck()
 
 
 function adder(arr, a, b, c, d) {
-    if (arr[d] === arr[c]) {
-        arr[d] *= 2
-        arr[c] = 0
-        validMove = true
-    } else if (arr[c] === 0 && arr[d] === arr[b]) {
-        arr[d] *=2
-        arr[b] = 0
-        validMove = true
-    } else if (arr[c] === 0 && arr[b] === 0 && arr[d] === arr[a]) {
-        arr[d] *=2
-        arr[a] = 0
-        validMove = true
-    } 
-    if (arr[c] === arr[b]) {
-        arr[c] *= 2
-        arr[b] = 0
-        validMove = true
-    } else if (arr[b] === 0 && arr[c] === arr[a]) {
-        arr[c] *=2
-        arr[a] = 0
-        validMove = true
-    } 
-    if (arr[b] === arr[a]) {
-        arr[b] *= 2
-        arr[a] = 0
-        validMove = true
-    } 
+    if ((arr[a] > 0 && arr[a] === arr[b]) || (arr[a] > 0 && arr[a] === arr[c]) || (arr[a] > 0 && arr[a] === arr[d]) || (arr[b] > 0 && arr[b] === arr[c]) || (arr[b] > 0 && arr[b] === arr[d]) || (arr[c] > 0 && arr[c] === arr[d])) {
+        validAdd = true
+        if (arr[d] === arr[c]) {
+            arr[d] *= 2
+            arr[c] = 0
+        } else if (arr[c] === 0 && arr[d] === arr[b]) {
+            arr[d] *=2
+            arr[b] = 0
+        } else if (arr[c] === 0 && arr[b] === 0 && arr[d] === arr[a]) {
+            arr[d] *=2
+            arr[a] = 0
+        } 
+        if (arr[c] === arr[b]) {
+            arr[c] *= 2
+            arr[b] = 0
+        } else if (arr[b] === 0 && arr[c] === arr[a]) {
+            arr[c] *=2
+            arr[a] = 0
+        } 
+        if (arr[b] === arr[a]) {
+            arr[b] *= 2
+            arr[a] = 0
+        } 
+        console.log(validAdd)
+    } else {
+        console.log(validAdd)
+    }
 
 }
 
 
 
 function slideRight(arr, a, b, c, d) {
-    
 
-    for (let i = 0; i<8; i++) {
-     if (arr[a] > 0 && arr[b] === 0) {
-         arr[b] = arr[a]
-         arr[a] = 0
-         validMove = true
-     } 
-     if (arr[b] > 0 && arr[c] === 0) {
-         arr[c] = arr[b]
-         arr[b] = 0
-         validMove = true
-     }
-     if (arr[c] > 0 && arr[d] === 0) {
-         arr[d] = arr[c]
-         arr[c] = 0
-         validMove = true
-     }
-    }
-    
-    
+        for (let i = 0; i<8; i++) {
+         if (arr[a] > 0 && arr[b] === 0) {
+             arr[b] = arr[a]
+             arr[a] = 0
+             validMove = true
+         } 
+         if (arr[b] > 0 && arr[c] === 0) {
+             arr[c] = arr[b]
+             arr[b] = 0
+             validMove = true
+         }
+         if (arr[c] > 0 && arr[d] === 0) {
+             arr[d] = arr[c]
+             arr[c] = 0
+             validMove = true
+         }
+        }
 }
 
 
 
 function moveRight(e) {
     if (e.keyCode === 39) {
-        htmlValues.push(values)
         console.log('right')
         adder(values, 0, 1, 2, 3)
         adder(values, 4, 5, 6, 7)
@@ -151,18 +148,15 @@ function moveRight(e) {
         slideRight(values, 4, 5, 6, 7)
         slideRight(values, 8, 9, 10, 11)
         slideRight(values, 12, 13, 14, 15)
-
-        htmlValues.push(values)
-        console.log(htmlValues)
-        lossCheck()
+        if (validAdd === true) {
+            lossCheck()
+        }
         valuePusher()
-        console.log(validMove)
     }
 }
 
 function moveLeft(e) {
     if (e.keyCode === 37) {
-        let oldVal = values
         console.log('left')
         adder(values, 3, 2, 1, 0)
         adder(values, 7, 6, 5, 4)
@@ -174,8 +168,6 @@ function moveLeft(e) {
         slideRight(values, 15, 14, 13, 12)
         lossCheck()
         valuePusher()
-        htmlValues.push(values)
-        console.log(htmlValues)
     }
 }
 function moveUp(e) {
@@ -191,8 +183,6 @@ function moveUp(e) {
         slideRight(values, 12, 8, 4, 0)
         lossCheck()
         valuePusher()
-        htmlValues.push(values)
-        console.log(htmlValues)
     }
 }
 function moveDown(e) {
@@ -208,22 +198,18 @@ function moveDown(e) {
         slideRight(values, 0, 4, 8, 12)
         lossCheck()
         valuePusher()
-        htmlValues.push(values)
-        console.log(htmlValues)
     }
 }
 
 function spaceAdd(e) {
     if (e.keyCode === 32) {
         console.log('space')
-        lossCheck()
     }
 }
 
 
 valuePusher()
 
-console.log(validMove)
 
 document.addEventListener('keydown', moveRight)
 document.addEventListener('keydown', moveLeft)
