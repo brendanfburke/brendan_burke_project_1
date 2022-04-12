@@ -3,16 +3,16 @@ const boardArray = board.querySelectorAll('.tile')
 const resetButton = document.querySelector('.reset')
 const message = board.querySelector('.popup')
 const values = [
-    // 0,0,0,0,
-    // 0,0,0,0,
-    // 0,0,0,0,
-    // 0,0,0,0 
+    0,0,0,0,
+    0,0,0,0,
+    0,0,0,0,
+    0,0,0,0 
 
     //lose condition
-   0,0,0,5,
-    1,6,7,8,
-    9,1,3,2,
-    5,4,6,1 
+//    0,0,0,5,
+//     1,6,7,8,
+//     9,1,3,2,
+//     5,4,6,1 
 
     // win condition
     // 0,0,0,0,
@@ -331,6 +331,7 @@ function moveRight(e) {
 
         if (validAdd === true || validMove === true) {
             lossCheck()
+            boardArray.forEach(element => {element.classList.toggle('appear')})
         } else if(validAdd === false && validMove === false) {
             console.log('no moves')
         }
@@ -347,6 +348,7 @@ function moveLeft(e) {
 
         if (validAdd === true || validMove === true) {
             lossCheck()
+            boardArray.forEach(element => {element.classList.toggle('appear')})
         } else if(validAdd === false && validMove === false) {
             console.log('no moves')
         }
@@ -362,6 +364,7 @@ function moveUp(e) {
 
         if (validAdd === true || validMove === true) {
             lossCheck()
+            boardArray.forEach(element => {element.classList.toggle('appear')})
         } else if(validAdd === false && validMove === false) {
             console.log('no moves')
         }
@@ -377,6 +380,7 @@ function moveDown(e) {
 
         if (validAdd === true || validMove === true) {
             lossCheck()
+            boardArray.forEach(element => {element.classList.toggle('appear')})
         } else if(validAdd === false && validMove === false) {
             console.log('no moves')
         }
@@ -401,6 +405,12 @@ function resetBoard() {
     lossCheck()
     lossCheck()
     message.classList.remove('show')
+}
+
+function tileShow(e) {
+    if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
+        boardArray.classList.toggle('appear')
+    }
 }
 
 valuePusher()
