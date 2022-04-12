@@ -1,7 +1,8 @@
 const board = document.querySelector('.board-container')
 const boardArray = board.querySelectorAll('.tile')
-const resetButton = document.querySelector('.reset')
-const message = board.querySelector('.popup')
+const resetButton = board.querySelector('.reset')
+const popup = board.querySelector('.popup')
+const message = popup.querySelector('.message')
 const values = [
     0,0,0,0,
     0,0,0,0,
@@ -85,8 +86,11 @@ function lossCheck() {
     if (values.some(zeroCheck) === true) {
         populateRandom()
     } else if (values.some(zeroCheck) === false) {
-        message.classList.add('show')
+        popup.classList.add('show')
         message.innerHTML= 'You Lose! Press reset to play again'
+        boardArray.forEach(element => {
+            element.classList.toggle('appear')
+        })
     } else {
         console.log('something is wrong')
     }
@@ -98,8 +102,11 @@ lossCheck()
 function checkWin() {
     const win = (element) => element === 2048
     if (values.some(win) === true) {
-        message.classList.add('show')
+        popup.classList.add('show')
         message.innerHTML = 'Winner! Press reset to play again!'
+        boardArray.forEach(element => {
+            element.classList.toggle('appear')
+        })
     }
 }
 
@@ -331,7 +338,6 @@ function moveRight(e) {
 
         if (validAdd === true || validMove === true) {
             lossCheck()
-            boardArray.forEach(element => {element.classList.toggle('appear')})
         } else if(validAdd === false && validMove === false) {
             console.log('no moves')
         }
@@ -348,7 +354,6 @@ function moveLeft(e) {
 
         if (validAdd === true || validMove === true) {
             lossCheck()
-            boardArray.forEach(element => {element.classList.toggle('appear')})
         } else if(validAdd === false && validMove === false) {
             console.log('no moves')
         }
@@ -364,7 +369,7 @@ function moveUp(e) {
 
         if (validAdd === true || validMove === true) {
             lossCheck()
-            boardArray.forEach(element => {element.classList.toggle('appear')})
+            
         } else if(validAdd === false && validMove === false) {
             console.log('no moves')
         }
@@ -380,7 +385,6 @@ function moveDown(e) {
 
         if (validAdd === true || validMove === true) {
             lossCheck()
-            boardArray.forEach(element => {element.classList.toggle('appear')})
         } else if(validAdd === false && validMove === false) {
             console.log('no moves')
         }
@@ -404,14 +408,13 @@ function resetBoard() {
     valuePusher()
     lossCheck()
     lossCheck()
-    message.classList.remove('show')
+    popup.classList.remove('show')
+    boardArray.forEach(element => {
+        element.classList.toggle('appear')
+    })
 }
 
-function tileShow(e) {
-    if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
-        boardArray.classList.toggle('appear')
-    }
-}
+
 
 valuePusher()
 
