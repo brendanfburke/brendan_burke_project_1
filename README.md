@@ -12,7 +12,8 @@ Use the directional keys to slide available tiles in a chosen direction. If the 
 
 ## Visual
 
-![board-screenshot] (images/2048-Screenshot.png)
+![Screen Shot 2022-04-12 at 3 37 32 PM](https://user-images.githubusercontent.com/101018068/163042300-c32265db-bcc7-49eb-b794-70c5032d3199.png)
+
 
 ### Phase 1
 
