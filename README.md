@@ -12,7 +12,28 @@ Use the directional keys to slide available tiles in a chosen direction. If the 
 
 ## Visual
 
+This is how the game begins
+
 ![Screen Shot 2022-04-12 at 3 37 32 PM](https://user-images.githubusercontent.com/101018068/163042300-c32265db-bcc7-49eb-b794-70c5032d3199.png)
+
+This is an example of how the game looks directly before a win
+
+![Screen Shot 2022-04-13 at 9 00 28 AM](https://user-images.githubusercontent.com/101018068/163186074-f79ce23b-9320-42b6-b675-b5c9ad080a1f.png)
+
+This is how the game looks in a losing position, there are no more possible moves and the game will end on the next keystroke
+
+![Screen Shot 2022-04-13 at 9 05 14 AM](https://user-images.githubusercontent.com/101018068/163186484-89992c9f-4613-4854-9147-7281b51cf6fc.png)
+
+
+
+
+## Technologies Used 
+
+This game was built using HTML, CSS, JavaScript
+
+### Playable Game
+
+https://brendanfburke.github.io/brendan_burke_project_1/
 
 
 ### Phase 1
@@ -29,6 +50,3 @@ Phase 2 will begin with debugging. Once the game is fully debugged I will begin 
 - Sliding animations
 - More thoughtful page design
 
-### Playable Game
-
-https://brendanfburke.github.io/brendan_burke_project_1/
