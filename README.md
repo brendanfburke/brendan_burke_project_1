@@ -31,10 +31,37 @@ This is how the game looks in a losing position, there are no more possible move
 
 This game was built using HTML, CSS, JavaScript
 
-### Playable Game
+## Playable Game
 
 https://brendanfburke.github.io/brendan_burke_project_1/
 
+## Code Snippet
+
+``` 
+if ((arr[a] > 0 && arr[a] === arr[b]) || (arr[a] > 0 && arr[a] === arr[c]) || (arr[a] > 0 && arr[a] === arr[d]) || (arr[b] > 0 && arr[b] === arr[c]) || (arr[b] > 0 && arr[b] === arr[d]) || (arr[c] > 0 && arr[c] === arr[d])) {
+        validAddOne = true
+        if (arr[d] === arr[c]) {
+            arr[d] *= 2
+            arr[c] = 0
+        } else if (arr[c] === 0 && arr[d] === arr[b]) {
+            arr[d] *=2
+            arr[b] = 0
+        } else if (arr[c] === 0 && arr[b] === 0 && arr[d] === arr[a]) {
+            arr[d] *=2
+            arr[a] = 0
+        } 
+        if (arr[c] === arr[b]) {
+            arr[c] *= 2
+            arr[b] = 0
+        } else if (arr[b] === 0 && arr[c] === arr[a]) {
+            arr[c] *=2
+            arr[a] = 0
+        } 
+        if (arr[b] === arr[a]) {
+            arr[b] *= 2
+            arr[a] = 0
+        }
+```
 
 ### Phase 1
 
